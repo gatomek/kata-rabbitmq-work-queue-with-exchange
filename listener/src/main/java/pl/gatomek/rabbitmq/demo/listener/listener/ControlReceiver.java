@@ -16,7 +16,7 @@ import java.time.Duration;
 @Profile("control")
 public class ControlReceiver {
 
-    public static final String THROW_EXCEPTION_WHILE_PROCESSING = "0";
+    public static final String EXCEPTION_TRIGGER_VALUE = "0";
 
     @Value("${controlfile.filepath}")
     private String controlFilePath;
@@ -26,7 +26,7 @@ public class ControlReceiver {
         Thread.sleep(Duration.ofSeconds(1));
 
         String content = Files.readString(Paths.get(controlFilePath));
-        if (THROW_EXCEPTION_WHILE_PROCESSING.equals(content)) {
+        if (EXCEPTION_TRIGGER_VALUE.equals(content)) {
             log.info("File content: {}", content);
             log.info("Throwing custom interrupted exception");
             throw new CustomInterruptedException();
